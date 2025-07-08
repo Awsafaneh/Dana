@@ -1,0 +1,378 @@
+// components/ServiceCard.js
+import React from 'react';
+
+function ServiceCard({ title, description, icon }) {
+  return (
+    <div className="bg-white shadow-xl rounded-3xl p-8 border border-[#e9e4dd] hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 flex flex-col items-center text-center animate-fade-in">
+      <div className="text-6xl text-[#f7d794] mb-4">{icon}</div> {/* Icon placeholder */}
+      <h3 className="text-2xl font-semibold text-[#7b5f42] mb-3">{title}</h3>
+      <p className="text-gray-700 text-lg">{description}</p>
+      <button className="mt-4 text-[#7b5f42] hover:text-[#f7d794] font-medium transition duration-300 text-base">
+        Learn More →
+      </button>
+    </div>
+  );
+}
+
+export default ServiceCard;
+
+// components/EventCard.js
+import React from 'react';
+
+function EventCard({ title, description, icon }) {
+  return (
+    <div className="bg-white shadow-xl rounded-3xl p-8 border border-[#e9e4dd] hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 flex flex-col items-center text-center animate-fade-in">
+      <div className="text-6xl text-[#f7d794] mb-4">{icon}</div> {/* Icon placeholder */}
+      <h3 className="text-2xl font-semibold text-[#7b5f42] mb-3">{title}</h3>
+      <p className="text-gray-700 text-lg">{description}</p>
+      <button className="mt-4 text-[#7b5f42] hover:text-[#f7d794] font-medium transition duration-300 text-base">
+        Inquire →
+      </button>
+    </div>
+  );
+}
+
+export default EventCard;
+
+// pages/index.js (or pages/DanaResort.js if you prefer a different page name)
+import Head from 'next/head';
+import ServiceCard from '../components/ServiceCard'; // Adjust path if needed
+import EventCard from '../components/EventCard';     // Adjust path if needed
+
+export default function DanaResort() {
+  return (
+    <div className="font-serif text-gray-800 bg-white overflow-hidden">
+      <Head>
+        <title>منتجع دانا السياحي - رفاهية وعلاج شامل</title>
+        <meta name="description" content="اكتشف ملاذاً فاخراً وموجهاً نحو الصحة في منتجع دانا السياحي، الذي يقدم خدمات علاجية، واسترخاء، وبرامج صحية شاملة." />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      {/* Header/Navigation */}
+      <header className="fixed top-0 left-0 w-full bg-white bg-opacity-90 z-50 shadow-sm">
+        <nav className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+          <img src="/dana-logo.png" alt="شعار منتجع دانا" className="w-24 md:w-32" />
+          <ul className="flex space-x-6 lg:space-x-10 text-lg font-medium">
+            <li><a href="#hero" className="hover:text-[#7b5f42] transition duration-300">الرئيسية</a></li>
+            <li><a href="#therapeutic-services" className="hover:text-[#7b5f42] transition duration-300">العلاجية</a></li>
+            <li><a href="#relaxation-recreation" className="hover:text-[#7b5f42] transition duration-300">الاستجمام</a></li>
+            <li><a href="#fitness-nutrition" className="hover:text-[#7b5f42] transition duration-300">اللياقة</a></li>
+            <li><a href="#events-bookings" className="hover:text-[#7b5f42] transition duration-300">الفعاليات</a></li>
+            <li><a href="#contact" className="hover:text-[#7b5f42] transition duration-300">اتصل بنا</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center justify-center text-white text-center" id="hero">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover z-0 opacity-80"
+        >
+          <source src="/hero-video-placeholder.mp4" type="video/mp4" />
+          {/* تأكد من استبدال هذا برابط الفيديو الفعلي لموقعك */}
+          متصفحك لا يدعم وسم الفيديو.
+        </video>
+        <div className="absolute inset-0 bg-black opacity-40 z-10"></div> {/* طبقة داكنة لسهولة قراءة النص */}
+        <div className="z-20 p-6">
+          <img src="/dana-logo-white.png" alt="شعار منتجع دانا" className="mx-auto mb-6 w-48 animate-fade-in" /> {/* افتراض وجود نسخة بيضاء للشعار */}
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 animate-slide-up">
+            <span className="text-[#f7d794]">منتجع دانا</span> السياحي
+          </h1>
+          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-8 animate-slide-up animation-delay-200">
+            حيث تلتقي الفخامة بالصحة الشاملة: رحلتك نحو التجديد تبدأ هنا
+          </p>
+          <button className="bg-[#f7d794] text-[#7b5f42] hover:bg-white hover:text-[#7b5f42] font-semibold py-3 px-8 rounded-full text-lg shadow-lg transition duration-300 transform hover:scale-105 animate-fade-in animation-delay-400">
+            احجز رحلتك العلاجية
+          </button>
+        </div>
+      </section>
+
+      {/* Therapeutic Services */}
+      <section className="py-20 bg-gradient-to-b from-white to-[#fcfaf8] px-6 relative z-10" id="therapeutic-services">
+        <h2 className="text-4xl font-bold text-center text-[#7b5f42] mb-16 relative">
+          <span className="relative">
+            الخدمات العلاجية والاستشفائية
+            <span className="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-24 h-1 bg-[#f7d794] rounded-full"></span>
+          </span>
+        </h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+          <ServiceCard title="العلاج المائي" description="تمارين مائية علاجية، تعافي من الإصابات، وتقنيات مائية متقدمة لشفاء عميق." icon="🌊" />
+          <ServiceCard title="التدليك الطبي" description="تقنيات متخصصة تشمل الزيوت العطرية، التدليك التايلاندي، الاسترخائي، والرياضي مصممة خصيصاً لاحتياجاتك." icon="💆" />
+          <ServiceCard title="الحجامة الطبية" description="طرق الحجامة الجافة، الرطبة، والمتزحلقة لتخفيف الألم وتحسين الدورة الدموية." icon="🔥" />
+          <ServiceCard title="العلاج الطبيعي" description="تأهيل بدني شامل، تعافي من الجلطات، علاج الاعتلال العصبي، وعلاج إصابات الملاعب." icon="🚶" />
+          <ServiceCard title="ميزات المنتجع الصحي" description="انغمس في مجموعة من علاجات السبا المجددة المصممة لتنقية، استرخاء، وتنشيط جسمك." icon="🧖‍♀️" />
+        </div>
+      </section>
+
+      {/* Relaxation & Recreation */}
+      <section className="py-20 bg-white px-6 relative z-10" id="relaxation-recreation">
+        <h2 className="text-4xl font-bold text-center text-[#7b5f42] mb-16 relative">
+          <span className="relative">
+            الاسترخاء والتجديد
+            <span className="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-24 h-1 bg-[#f7d794] rounded-full"></span>
+          </span>
+        </h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+          <ServiceCard title="الحمامات المغربية" description="اختبر طقوس التنظيف والتطهير التقليدية للاسترخاء التام وإزالة السموم." icon="🛁" />
+          <ServiceCard title="ساونا وجاكوزي" description="استرخِ في حمامات الساونا والجاكوزي المتطورة لدينا والمصممة لاسترخاء العضلات العميق." icon="🧖‍♂️" />
+          <ServiceCard title="علاجات البشرة" description="علاجات الوجه المخصصة، الأقنعة الطبيعية، علاجات مكافحة الشيخوخة، وطقوس العناية بالبشرة المغذية." icon="✨" />
+          <ServiceCard title="مغطس الثلج" description="انعش حواسك وساعد على التعافي باستخدام أحواض مغطس الثلج المنعشة." icon="🧊" />
+        </div>
+      </section>
+
+      {/* Fitness & Nutrition */}
+      <section className="py-20 bg-[#fcfaf8] px-6 relative z-10" id="fitness-nutrition">
+        <h2 className="text-4xl font-bold text-center text-[#7b5f42] mb-16 relative">
+          <span className="relative">
+            اللياقة البدنية والتغذية الشخصية
+            <span className="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-24 h-1 bg-[#f7d794] rounded-full"></span>
+          </span>
+        </h2>
+        <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-10 max-w-7xl mx-auto items-center">
+          <div className="p-8 bg-white shadow-xl rounded-3xl animate-fade-in-left">
+            <h3 className="text-3xl font-semibold text-[#7b5f42] mb-4">برامج اللياقة البدنية المخصصة</h3>
+            <p className="text-lg text-gray-700 mb-6">
+              يصمم مدربونا الخبراء برامج خصيصاً لك، سواء كان هدفك خسارة الوزن، بناء العضلات،
+              أو تحسين المرونة والقدرة على التحمل.
+            </p>
+            <ul className="list-disc list-inside text-gray-700 text-lg space-y-2">
+              <li>يوغا وبيلاتس للمرونة وتوازن العقل والجسم</li>
+              <li>تمارين الأيروبيك والكارديو لصحة القلب والأوعية الدموية</li>
+              <li>برامج بناء القوة والعضلات</li>
+              <li>جلسات تدريب شخصية</li>
+            </ul>
+          </div>
+          <div className="p-8 bg-white shadow-xl rounded-3xl animate-fade-in-right">
+            <h3 className="text-3xl font-semibold text-[#7b5f42] mb-4">خطط التغذية الشخصية</h3>
+            <p className="text-lg text-gray-700 mb-6">
+              حقق أهدافك الصحية من خلال خطط تغذية مخصصة يطورها أخصائيو التغذية المعتمدون لدينا.
+              ركز على عادات الأكل المستدامة لرفاهية مثالية.
+            </p>
+            <ul className="list-disc list-inside text-gray-700 text-lg space-y-2">
+              <li>تقييمات غذائية فردية</li>
+              <li>تخطيط الوجبات لمختلف الحالات الصحية</li>
+              <li>استراتيجيات إدارة الوزن</li>
+              <li>إرشادات ودعم غذائي</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Events & Private Bookings */}
+      <section className="py-20 bg-white px-6 relative z-10" id="events-bookings">
+        <h2 className="text-4xl font-bold text-center text-[#7b5f42] mb-16 relative">
+          <span className="relative">
+            الفعاليات والحجوزات الخاصة
+            <span className="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-24 h-1 bg-[#f7d794] rounded-full"></span>
+          </span>
+        </h2>
+        <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+          <EventCard title="تجهيزات الزفاف" description="باقات تدليل للعروسين، لضمان إشراقتكما في يومكما الخاص." icon="💍" />
+          <EventCard title="حفلات حمام العروسين" description="احتفالات فريدة قبل الزفاف مع طقوس الحمام التقليدية لحفلات الزفاف." icon="🎉" />
+          <EventCard title="خلوات صحية جماعية" description="برامج مخصصة للمجموعات الشركاتية، الأصدقاء، أو العائلات الباحثة عن ملاذ مجدد." icon="👥" />
+        </div>
+        <div className="text-center mt-12">
+          <button className="bg-[#7b5f42] text-white hover:bg-[#f7d794] hover:text-[#7b5f42] font-semibold py-3 px-8 rounded-full text-lg shadow-lg transition duration-300 transform hover:scale-105">
+            خطط لفعاليتك
+          </button>
+        </div>
+      </section>
+
+      {/* Children’s Activities & Sports Teams */}
+      <section className="py-20 bg-[#fcfaf8] px-6 relative z-10">
+        <h2 className="text-4xl font-bold text-center text-[#7b5f42] mb-16 relative">
+          <span className="relative">
+            برامج متخصصة
+            <span className="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-24 h-1 bg-[#f7d794] rounded-full"></span>
+          </span>
+        </h2>
+        <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-10 max-w-7xl mx-auto">
+          <div className="p-8 bg-white shadow-xl rounded-3xl animate-fade-in-left">
+            <h3 className="text-3xl font-semibold text-[#7b5f42] mb-4 flex items-center"><span className="text-4xl mr-3">🧒</span>أنشطة الأطفال</h3>
+            <p className="text-lg text-gray-700 mb-6">
+              برامج جذابة وتنموية للأطفال، تضمن تجربة ممتعة ومثرية بينما يستريح الوالدان.
+            </p>
+            <ul className="list-disc list-inside text-gray-700 text-lg space-y-2">
+              <li>مناطق لعب تحت الإشراف</li>
+              <li>ورش عمل إبداعية وألعاب تعليمية</li>
+              <li>أنشطة خارجية واستكشاف الطبيعة</li>
+            </ul>
+          </div>
+          <div className="p-8 bg-white shadow-xl rounded-3xl animate-fade-in-right">
+            <h3 className="text-3xl font-semibold text-[#7b5f42] mb-4 flex items-center"><span className="text-4xl mr-3">🏆</span>الفرق الرياضية وبرامج التأهيل</h3>
+            <p className="text-lg text-gray-700 mb-6">
+              برامج مخصصة للفرق الرياضية تركز على التعافي، الوقاية من الإصابات، وتحسين الأداء.
+            </p>
+            <ul className="list-disc list-inside text-gray-700 text-lg space-y-2">
+              <li>العلاج الطبيعي الرياضي والتدليك</li>
+              <li>العلاج المائي لتسريع التعافي</li>
+              <li>خطط لياقة وتغذية مصممة خصيصاً للرياضيين</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Farm Rental */}
+      <section className="py-20 bg-white px-6 relative z-10" id="farm-rental">
+        <h2 className="text-4xl font-bold text-center text-[#7b5f42] mb-16 relative">
+          <span className="relative">
+            إيجار المزرعة الخاص
+            <span className="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-24 h-1 bg-[#f7d794] rounded-full"></span>
+          </span>
+        </h2>
+        <div className="max-w-4xl mx-auto text-center p-8 bg-[#fcfaf8] shadow-xl rounded-3xl">
+          <p className="text-xl text-gray-700 mb-6">
+            اهرب إلى مزرعتنا الهادئة لتجربة عائلية خاصة لا تُنسى. استمتع بصفاء الطبيعة مع خيارات حجز مرنة.
+          </p>
+          <div className="flex flex-col md:flex-row justify-center gap-6">
+            <button className="bg-[#7b5f42] text-white hover:bg-[#f7d794] hover:text-[#7b5f42] font-semibold py-3 px-8 rounded-full text-lg shadow-lg transition duration-300 transform hover:scale-105">
+              احجز الفترة الصباحية
+            </button>
+            <button className="bg-[#7b5f42] text-white hover:bg-[#f7d794] hover:text-[#7b5f42] font-semibold py-3 px-8 rounded-full text-lg shadow-lg transition duration-300 transform hover:scale-105">
+              احجز الفترة المسائية
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="py-20 bg-[#fcfaf8] px-6 relative z-10" id="contact">
+        <h2 className="text-4xl font-bold text-center text-[#7b5f42] mb-16 relative">
+          <span className="relative">
+            تواصل معنا
+            <span className="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-24 h-1 bg-[#f7d794] rounded-full"></span>
+          </span>
+        </h2>
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
+          {/* Contact Form */}
+          <div className="p-8 bg-white shadow-xl rounded-3xl">
+            <h3 className="text-2xl font-semibold text-[#7b5f42] mb-6">أرسل لنا رسالة</h3>
+            <form className="space-y-6">
+              <div>
+                <label htmlFor="name" className="block text-gray-700 text-lg font-medium mb-2">الاسم</label>
+                <input type="text" id="name" name="name" className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f7d794]" />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-gray-700 text-lg font-medium mb-2">البريد الإلكتروني</label>
+                <input type="email" id="email" name="email" className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f7d794]" />
+              </div>
+              <div>
+                <label htmlFor="message" className="block text-gray-700 text-lg font-medium mb-2">الرسالة</label>
+                <textarea id="message" name="message" rows="5" className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f7d794]"></textarea>
+              </div>
+              <button type="submit" className="bg-[#7b5f42] text-white hover:bg-[#f7d794] hover:text-[#7b5f42] font-semibold py-3 px-8 rounded-full text-lg shadow-lg transition duration-300 transform hover:scale-105">
+                أرسل الرسالة
+              </button>
+            </form>
+          </div>
+          {/* Map & Info */}
+          <div className="p-8 bg-white shadow-xl rounded-3xl">
+            <h3 className="text-2xl font-semibold text-[#7b5f42] mb-6">تجدنا هنا</h3>
+            <div className="mb-6">
+              <p className="text-lg text-gray-700 mb-2 font-semibold">العنوان:</p>
+              <p className="text-gray-600">شارع العافية 123، مدينة الصفاء، الأردن</p> {/* استبدل بالعنوان الفعلي */}
+            </div>
+            <div className="mb-6">
+              <p className="text-lg text-gray-700 mb-2 font-semibold">الهاتف:</p>
+              <p className="text-gray-600">+962 7XXXXXXXX</p> {/* استبدل برقم الهاتف الفعلي */}
+            </div>
+            <div className="mb-6">
+              <p className="text-lg text-gray-700 mb-2 font-semibold">البريد الإلكتروني:</p>
+              <p className="text-gray-600">info@danatouristresort.com</p> {/* استبدل بالبريد الإلكتروني الفعلي */}
+            </div>
+            <div className="h-64 bg-gray-200 rounded-lg overflow-hidden">
+              {/* مكان لخريطة جوجل */}
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12345.67890!2d35.9251!3d31.9540!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDQ5JzAxLjEiTiAzN8KwNTUnMjUuMiJF!5e0!3m2!1sen!2sjo!4v1678901234567!5m2!1sen!2sjo"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="موقع منتجع دانا السياحي"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery Section - Link to full gallery page */}
+      <section className="py-20 bg-white px-6 text-center" id="gallery">
+        <h2 className="text-4xl font-bold text-center text-[#7b5f42] mb-16 relative">
+          <span className="relative">
+            معرض الصور
+            <span className="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-24 h-1 bg-[#f7d794] rounded-full"></span>
+          </span>
+        </h2>
+        <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+          استكشف جمال وهدوء منتجع دانا السياحي من خلال معرض الصور والفيديو الساحر لدينا.
+        </p>
+        <button className="bg-[#7b5f42] text-white hover:bg-[#f7d794] hover:text-[#7b5f42] font-semibold py-3 px-8 rounded-full text-lg shadow-lg transition duration-300 transform hover:scale-105">
+          شاهد المعرض بالكامل
+        </button>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-[#7b5f42] text-white text-center py-12 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-8">
+            <img src="/dana-logo-white.png" alt="شعار منتجع دانا" className="w-28 mb-4 md:mb-0" />
+            <div className="flex space-x-6">
+              <a href="#" className="text-white hover:text-[#f7d794] transition duration-300">سياسة الخصوصية</a>
+              <a href="#" className="text-white hover:text-[#f7d794] transition duration-300">شروط الخدمة</a>
+              <a href="#" className="text-white hover:text-[#f7d794] transition duration-300">خريطة الموقع</a>
+            </div>
+            <div className="flex space-x-4 mt-4 md:mt-0">
+              {/* أيقونات وسائل التواصل الاجتماعي - استبدلها بأيقونات SVG أو Font Awesome الفعلية */}
+              <a href="#" className="text-white hover:text-[#f7d794] transition duration-300"><i className="fab fa-facebook-f"></i></a>
+              <a href="#" className="text-white hover:text-[#f7d794] transition duration-300"><i className="fab fa-instagram"></i></a>
+              <a href="#" className="text-white hover:text-[#f7d794] transition duration-300"><i className="fab fa-twitter"></i></a>
+            </div>
+          </div>
+          <p className="text-sm border-t border-gray-600 pt-6">© 2025 منتجع دانا السياحي - جميع الحقوق محفوظة.</p>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+// Ensure you have these Tailwind CSS animations configured in your tailwind.config.js
+/*
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      keyframes: {
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'slide-up': {
+          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        'fade-in-left': {
+          '0%': { opacity: '0', transform: 'translateX(-20px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        'fade-in-right': {
+          '0%': { opacity: '0', transform: 'translateX(20px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+      },
+      animation: {
+        'fade-in': 'fade-in 0.8s ease-out forwards',
+        'slide-up': 'slide-up 0.8s ease-out forwards',
+        'fade-in-left': 'fade-in-left 0.8s ease-out forwards',
+        'fade-in-right': 'fade-in-right 0.8s ease-out forwards',
+      },
+    },
+  },
+  plugins: [],
+};
+*/
