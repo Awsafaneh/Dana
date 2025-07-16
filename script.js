@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // تعيين التبويبة النشطة عند تحميل الصفحة (تكون الرئيسية افتراضيًا)
+    // تعيين التبويبة النشطة عند تحميل الصفحة
     // تحقق من وجود hash في الرابط، وإلا فاجعل التبويبة الرئيسية هي النشطة
     let initialTab = window.location.hash.substring(1) || 'home';
     showTab(initialTab);
@@ -55,34 +55,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 hamburger.classList.remove('active');
             }
             
-            // تحديث URL دون إعادة تحميل الصفحة
+            // تحديث URL بدون إعادة تحميل الصفحة
             window.history.pushState(null, '', `#${targetTabId}`);
 
-            // إذا كان الرابط يؤدي إلى قسم داخل نفس التبويبة، قم بالتمرير إليه بسلاسة
-            const targetSection = document.getElementById(targetTabId);
-            if (targetSection) {
-                 window.scrollTo({
-                    top: targetSection.offsetTop - document.querySelector('.header').offsetHeight, // Offset by header height
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-
-    // إضافة منطق التمرير السلس للروابط الداخلية (بخلاف روابط التبويبات)
-    // هذا لضمان أن الروابط الداخلية (مثل "احجز الآن" داخل الرئيسية) تعمل بشكل سلس
-    document.querySelectorAll('a[href^="#"]:not([data-tab-target])').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const targetId = this.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
-
-            if (targetElement) {
-                e.preventDefault();
-                window.scrollTo({
-                    top: targetElement.offsetTop - document.querySelector('.header').offsetHeight, // Offset by header height
-                    behavior: 'smooth'
-                });
-            }
+            // التمرير إلى أعلى الصفحة بعد تغيير التبويبة
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
     });
 
@@ -97,5 +77,4 @@ document.addEventListener('DOMContentLoaded', function() {
             header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
         }
     });
-
 });
