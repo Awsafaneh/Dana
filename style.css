@@ -17,8 +17,8 @@
     --gradient-primary: linear-gradient(135deg, var(--primary-golden-dark) 0%, var(--secondary-brown-dark) 100%);
     --gradient-hero: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)); /* طبقة شفافة فوق صور البطل */
 
-    --dark-elements-color: var(--secondary-brown-dark); /* للعناصر الداكنة مثل نص الشعار الرئيسي */
-    --light-elements-color: var(--primary-golden-light); /* للعناصر الفاتحة مثل خلفيات البطاقات الخفيفة */
+    --dark-elements-color: var(--secondary-brown-dark); /* للعناصر الداكنة مثل نص الشعار الرئيسي والعناوين */
+    --light-elements-color: var(--primary-golden-light); /* للعناصر الفاتحة مثل خلفيات البطاقات الخفيفة وحدودها */
 
     /* ظلال وتحويلات */
     --transition-smooth: all 0.3s ease-in-out;
@@ -87,7 +87,6 @@ body {
     height: 60px; /* تكبير الشعار */
     width: auto;
     object-fit: contain; /* لضمان ظهور الشعار كاملاً */
-    /* قد تحتاج لإزالة border-radius: 8px; إذا كان الشعار نفسه دائرياً أو لا يحتاجه */
 }
 
 .logo-text h2 {
@@ -160,6 +159,8 @@ body {
     justify-content: center;
     /* خلفية البطل - تأكد من وجود hero-background.jpg في نفس المجلد */
     background: var(--gradient-hero), url('hero-background.jpg') no-repeat center center/cover;
+    background-size: cover; /* تأكيد تغطية الصورة للخلفية */
+    background-position: center; /* تأكيد توسيط الصورة */
     color: var(--white);
     padding: 120px 0 60px;
     position: relative;
@@ -233,13 +234,13 @@ body {
 }
 
 .btn-primary {
-    background: var(--highlight-color); /* لون برتقالي حيوي للأزرار الأساسية */
+    background: var(--highlight-color);
     color: var(--white);
     box-shadow: var(--button-shadow);
 }
 
 .btn-primary:hover {
-    background: var(--secondary-brown-dark); /* بني داكن عند التحويم */
+    background: var(--secondary-brown-dark);
     transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
@@ -252,7 +253,7 @@ body {
 
 .btn-secondary:hover {
     background: var(--white);
-    color: var(--primary-golden-dark); /* ذهبي داكن عند التحويم */
+    color: var(--primary-golden-dark);
     transform: translateY(-2px);
 }
 
@@ -294,7 +295,7 @@ body {
 .hero-card i {
     font-size: 4rem;
     margin-bottom: 1rem;
-    color: var(--accent-shine-gold); /* ذهبي لامع للأيقونات */
+    color: var(--accent-shine-gold);
     text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
 }
 
@@ -324,7 +325,7 @@ body {
 .stat h3 {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--accent-shine-gold); /* ذهبي لامع للأرقام */
+    color: var(--accent-shine-gold);
     margin-bottom: 0.5rem;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
 }
@@ -342,14 +343,14 @@ body {
 
 .section-header h2 {
     font-size: 2.5rem;
-    color: var(--dark-elements-color); /* بني داكن للعناوين الرئيسية */
+    color: var(--dark-elements-color);
     margin-bottom: 1rem;
     font-weight: 700;
 }
 
 .section-header p {
     font-size: 1.2rem;
-    color: #7f8c8d; /* رمادي للنصوص الوصفية */
+    color: #7f8c8d;
     max-width: 600px;
     margin: 0 auto;
 }
@@ -372,7 +373,7 @@ body {
     border-radius: 15px;
     box-shadow: var(--card-shadow);
     transition: var(--transition);
-    border: 1px solid var(--light-elements-color); /* ذهبي فاتح للحدود */
+    border: 1px solid var(--light-elements-color);
     position: relative;
     overflow: hidden;
     text-align: right;
@@ -403,7 +404,7 @@ body {
 .service-icon {
     width: 80px;
     height: 80px;
-    background: var(--gradient-primary); /* تدرج ذهبي/بني لأيقونات الخدمات */
+    background: var(--gradient-primary);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -481,7 +482,7 @@ body {
 .product-image {
     width: 100px;
     height: 100px;
-    background: var(--gradient-primary); /* تدرج ذهبي/بني لأيقونات المنتجات */
+    background: var(--gradient-primary);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -526,7 +527,7 @@ body {
 
 /* CTA Section */
 .cta-section {
-    background: var(--gradient-primary); /* استخدام التدرج الجديد */
+    background: var(--gradient-primary);
     color: var(--white);
     padding: 80px 0;
     text-align: center;
@@ -575,7 +576,7 @@ body {
 
 /* Page Header - for secondary pages/tabs */
 .page-header {
-    background: var(--gradient-primary); /* استخدام التدرج الجديد */
+    background: var(--gradient-primary);
     color: var(--white);
     padding: 120px 0 60px;
     text-align: center;
@@ -634,7 +635,7 @@ body {
 }
 
 .service-header {
-    background: var(--gradient-primary); /* استخدام التدرج الجديد */
+    background: var(--gradient-primary);
     color: var(--white);
     padding: 3rem;
     display: flex;
@@ -710,7 +711,7 @@ body {
 }
 
 .feature-item:hover {
-    background: var(--light-elements-color); /* لون ذهبي فاتح عند التحويم */
+    background: var(--light-elements-color);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
@@ -749,7 +750,7 @@ body {
 }
 
 .step:hover {
-    background: var(--light-elements-color); /* لون ذهبي فاتح عند التحويم */
+    background: var(--light-elements-color);
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
@@ -757,7 +758,7 @@ body {
 .step-number {
     width: 60px;
     height: 60px;
-    background: var(--gradient-primary); /* تدرج ذهبي/بني لأرقام الخطوات */
+    background: var(--gradient-primary);
     color: var(--white);
     border-radius: 50%;
     display: flex;
@@ -803,7 +804,7 @@ body {
 }
 
 .stat-item:hover {
-    background: var(--light-elements-color); /* لون ذهبي فاتح عند التحويم */
+    background: var(--light-elements-color);
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
@@ -811,7 +812,8 @@ body {
 .stat-icon {
     width: 80px;
     height: 80px;
-    background: var(--gradient-primary); /* تدرج ذهبي/بني لأيقونات الإحصائيات */
+    background: var(--gradient-primary);
+    color: var(--white);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -912,7 +914,7 @@ body {
 .image-placeholder {
     width: 100%;
     height: 100%;
-    background: var(--gradient-primary); /* تدرج ذهبي/بني كخلفية افتراضية */
+    background: var(--gradient-primary);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1044,7 +1046,7 @@ body {
 .method-icon {
     width: 60px;
     height: 60px;
-    background: var(--gradient-primary); /* تدرج ذهبي/بني لأيقونات طرق التواصل */
+    background: var(--gradient-primary);
     color: var(--white);
     border-radius: 50%;
     display: flex;
@@ -1125,7 +1127,7 @@ body {
 
 /* Footer */
 .footer {
-    background: var(--secondary-brown-dark); /* خلفية الفوتر بني داكن من اللوجو */
+    background: var(--secondary-brown-dark);
     color: var(--white);
     padding: 60px 0 20px;
     text-align: right;
@@ -1141,12 +1143,12 @@ body {
 .footer-section h3 {
     font-size: 1.3rem;
     margin-bottom: 1rem;
-    color: var(--accent-shine-gold); /* ذهبي لامع لعناوين الفوتر */
+    color: var(--accent-shine-gold);
     font-weight: 600;
 }
 
 .footer-section p {
-    color: #bdc3c7; /* رمادي فاتح لنصوص الفوتر */
+    color: #bdc3c7;
     line-height: 1.6;
     margin-bottom: 1rem;
 }
@@ -1167,7 +1169,7 @@ body {
 }
 
 .footer-section ul li a:hover {
-    color: var(--accent-shine-gold); /* ذهبي لامع عند التحويم */
+    color: var(--accent-shine-gold);
 }
 
 .social-links {
@@ -1180,7 +1182,7 @@ body {
 .social-links a {
     width: 40px;
     height: 40px;
-    background: rgba(255, 255, 255, 0.1); /* خلفية شفافة لأيقونات الفوتر */
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1191,14 +1193,14 @@ body {
 }
 
 .social-links a:hover {
-    background: var(--primary-golden-dark); /* ذهبي داكن عند التحويم */
+    background: var(--primary-golden-dark);
     transform: translateY(-2px);
 }
 
 .footer-bottom {
     text-align: center;
     padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1); /* خط فاصل فاتح */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     color: #bdc3c7;
 }
 
@@ -1206,10 +1208,10 @@ body {
 .whatsapp-float {
     position: fixed;
     bottom: 20px;
-    left: 20px; /* ليتوافق مع RTL ويظهر على اليسار */
+    left: 20px;
     width: 60px;
     height: 60px;
-    background-color: #25d366; /* لون واتساب الأخضر */
+    background-color: #25d366;
     color: var(--white);
     border-radius: 50%;
     text-align: center;
@@ -1225,7 +1227,7 @@ body {
 
 .whatsapp-float:hover {
     transform: scale(1.1);
-    background-color: #1DA851; /* لون أغمق عند التحويم */
+    background-color: #1DA851;
 }
 
 /* Responsive Design */
