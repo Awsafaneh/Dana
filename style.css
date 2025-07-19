@@ -157,8 +157,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* خلفية البطل - تأكد من وجود hero-background.jpg في نفس المجلد */
-    background: var(--gradient-hero), url('hero-background.jpg') no-repeat center center/cover;
+    /* Updated background image with a placeholder */
+    background: var(--gradient-hero), url('https://via.placeholder.com/1500x1000?text=Chalet+Dana+Hero+Image') no-repeat center center/cover; /* Placeholder for hero image */
     background-size: cover; /* تأكيد تغطية الصورة للخلفية */
     background-position: center; /* تأكيد توسيط الصورة */
     color: var(--white);
@@ -297,7 +297,15 @@ body {
     margin-bottom: 1rem;
     color: var(--accent-shine-gold);
     text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    /* Icon animation */
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
 }
+
+.hero-card:hover i {
+    transform: scale(1.1) rotate(5deg);
+    color: var(--highlight-color); /* Change color on hover */
+}
+
 
 .hero-card h3 {
     font-size: 1.5rem;
@@ -413,11 +421,23 @@ body {
     margin-right: auto;
     margin-left: unset;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    /* Icon animation */
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+    background: var(--highlight-color); /* Change background on hover */
+    transform: rotateY(10deg);
 }
 
 .service-icon i {
     font-size: 2rem;
     color: var(--white);
+    /* Icon animation */
+    transition: transform 0.3s ease-in-out;
+}
+.service-card:hover .service-icon i {
+    transform: scale(1.1); /* Slightly enlarge icon on hover */
 }
 
 .service-card h3 {
@@ -489,12 +509,25 @@ body {
     justify-content: center;
     margin: 0 auto 1.5rem;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    /* Icon animation */
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+    background: var(--highlight-color); /* Change background on hover */
+    transform: rotate(5deg);
 }
 
 .product-image i {
     font-size: 2.5rem;
     color: var(--white);
+    /* Icon animation */
+    transition: transform 0.3s ease-in-out;
 }
+.product-card:hover .product-image i {
+    transform: scale(1.1); /* Slightly enlarge icon on hover */
+}
+
 
 .product-card h3 {
     font-size: 1.3rem;
@@ -654,12 +687,25 @@ body {
     justify-content: center;
     flex-shrink: 0;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    /* Icon animation */
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.service-section:hover .service-icon {
+    background: var(--highlight-color); /* Change background on hover */
+    transform: rotateY(15deg);
 }
 
 .service-icon i {
     font-size: 3rem;
     color: var(--white);
+    /* Icon animation */
+    transition: transform 0.3s ease-in-out;
 }
+.service-section:hover .service-icon i {
+    transform: scale(1.15); /* Slightly enlarge icon on hover */
+}
+
 
 .service-title {
     text-align: right;
@@ -720,6 +766,11 @@ body {
     font-size: 1.5rem;
     color: var(--highlight-color);
     margin-top: 0.2rem;
+    /* Icon animation */
+    transition: transform 0.3s ease-in-out;
+}
+.feature-item:hover i {
+    transform: scale(1.2); /* Slightly enlarge icon on hover */
 }
 
 .feature-item h4 {
@@ -768,6 +819,13 @@ body {
     font-weight: 700;
     margin: 0 auto 1.5rem;
     box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    /* Icon animation (for step numbers which are not icons but follow similar visual logic) */
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.step:hover .step-number {
+    background: var(--highlight-color);
+    transform: scale(1.1);
 }
 
 .step h4 {
@@ -820,11 +878,23 @@ body {
     justify-content: center;
     margin: 0 auto 1.5rem;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    /* Icon animation */
+    transition: background 0.3s ease, transform 0.3s ease;
 }
+.stat-item:hover .stat-icon {
+    background: var(--highlight-color);
+    transform: scale(1.05);
+}
+
 
 .stat-icon i {
     font-size: 2rem;
     color: var(--white);
+    /* Icon animation */
+    transition: transform 0.3s ease-in-out;
+}
+.stat-item:hover .stat-icon i {
+    transform: rotateY(15deg);
 }
 
 .stat-content h3 {
@@ -899,7 +969,7 @@ body {
 
 .gallery-item:hover {
     transform: scale(1.03) translateY(-5px);
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
 }
 
 .gallery-image {
@@ -958,18 +1028,6 @@ body {
 .gallery-item:hover .gallery-content {
     transform: translateY(0);
     opacity: 1;
-}
-
-.gallery-content h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    font-weight: 600;
-}
-
-.gallery-content p {
-    margin-bottom: 1.5rem;
-    opacity: 0.9;
-    line-height: 1.6;
 }
 
 .gallery-tags {
@@ -1054,11 +1112,22 @@ body {
     justify-content: center;
     flex-shrink: 0;
     box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    /* Icon animation */
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+.contact-method:hover .method-icon {
+    background: var(--highlight-color);
+    transform: scale(1.05);
 }
 
 .method-icon i {
     font-size: 1.5rem;
     color: var(--white);
+    /* Icon animation */
+    transition: transform 0.3s ease-in-out;
+}
+.contact-method:hover .method-icon i {
+    transform: rotate(10deg);
 }
 
 .method-content h3 {
@@ -1123,6 +1192,11 @@ body {
 
 .social-link i {
     font-size: 1.2rem;
+    /* Icon animation */
+    transition: transform 0.3s ease-in-out;
+}
+.social-link:hover i {
+    transform: scale(1.1);
 }
 
 /* Footer */
@@ -1195,6 +1269,13 @@ body {
 .social-links a:hover {
     background: var(--primary-golden-dark);
     transform: translateY(-2px);
+}
+
+.social-links a i {
+    transition: transform 0.3s ease-in-out;
+}
+.social-links a:hover i {
+    transform: scale(1.1);
 }
 
 .footer-bottom {
