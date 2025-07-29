@@ -1,81 +1,72 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // كود لتفعيل/تعطيل قائمة التنقل في الجوال (Hamburger Menu)
+document.addEventListener('DOMContentLoaded', () => {
+    const navLinks = document.querySelectorAll('.nav-link');
+    const tabContents = document.querySelectorAll('.tab-content');
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
 
-    hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        hamburger.classList.toggle('active'); // لإضافة تأثير الإغلاق (X) للهمبرغر
-    });
+    // Function to handle tab switching
+    const showTab = (targetId) => {
+        // Remove active class from all nav links
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+        });
 
-    // كود لإدارة التبويبات (Tabs)
-    const navLinks = document.querySelectorAll('.nav-link, .btn[data-tab-target]'); // يشمل الروابط والأزرار التي تفتح التبويبات
-    const tabContents = document.querySelectorAll('.tab-content');
+        // Add active class to the clicked nav link
+        const activeLink = document.querySelector(`[data-tab-target="${targetId}"]`);
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
 
-    // دالة لإظهار التبويبة المطلوبة وإخفاء الباقي
-    function showTab(targetId) {
+        // Hide all tab contents
         tabContents.forEach(content => {
-            if (content.id === targetId) {
-                content.classList.add('active');
-            } else {
-                content.classList.remove('active');
+            content.classList.remove('active');
+            content.style.display = 'none'; // Ensure it's hidden for layout purposes
+        });
+
+        // Show the target tab content
+        const targetContent = document.getElementById(targetId);
+        if (targetContent) {
+            targetContent.classList.add('active');
+            targetContent.style.display = 'block'; // Or 'flex' or 'grid' based on section's display
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top of the page
+        }
+    };
+
+    // Event listeners for navigation links
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent default anchor link behavior
+            const targetId = link.dataset.tabTarget;
+            showTab(targetId);
+
+            // Close hamburger menu if open (for mobile)
+            if (navMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
             }
         });
+    });
+
+    // Event listener for hamburger menu
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+
+    // Handle initial load based on URL hash (if any)
+    const initialHash = window.location.hash.substring(1);
+    if (initialHash && document.getElementById(initialHash)) {
+        showTab(initialHash);
+    } else {
+        // Default to 'home' tab if no valid hash is present
+        showTab('home');
     }
 
-    // تعيين التبويبة النشطة عند تحميل الصفحة
-    // تحقق من وجود hash في الرابط، وإلا فاجعل التبويبة الرئيسية هي النشطة
-    let initialTab = window.location.hash.substring(1) || 'home';
-    showTab(initialTab);
-    // وتحديث فئة 'active' للرابط في القائمة
-    navLinks.forEach(link => {
-        if (link.dataset.tabTarget === initialTab) {
-            link.classList.add('active');
-        } else {
-            link.classList.remove('active');
-        }
-    });
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault(); // منع الانتقال الافتراضي للرابط
-
-            // إزالة فئة 'active' من جميع روابط التنقل
-            navLinks.forEach(item => item.classList.remove('active'));
-            // إضافة فئة 'active' للرابط الذي تم النقر عليه
-            this.classList.add('active');
-
-            // إظهار التبويبة المستهدفة
-            const targetTabId = this.dataset.tabTarget;
-            showTab(targetTabId);
-
-            // إغلاق قائمة الجوال إذا كانت مفتوحة
-            if (navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-                hamburger.classList.remove('active');
-            }
-            
-            // تحديث URL بدون إعادة تحميل الصفحة
-            window.history.pushState(null, '', `#${targetTabId}`);
-
-            // التمرير إلى أعلى الصفحة بعد تغيير التبويبة
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    });
-
-    // كود لتغيير خلفية الهيدر عند التمرير
-    const header = document.querySelector('.header');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
-            header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
-        } else {
-            header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
-            header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+    // Optional: Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!navMenu.contains(e.target) && !hamburger.contains(e.target) && navMenu.classList.contains('active')) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
         }
     });
 });
-
