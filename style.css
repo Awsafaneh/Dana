@@ -26,9 +26,10 @@
     --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     --button-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 
-    /* RGB values for transparent colors */
+    /* RGB values for transparent colors in rgba() */
     --primary-golden-dark-rgb: 163, 138, 90;
     --secondary-brown-dark-rgb: 94, 77, 48;
+    --accent-shine-gold-rgb: 194, 165, 101;
     --highlight-color-rgb: 200, 121, 90;
 }
 
@@ -56,6 +57,115 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--highlight-color);
+    transition: color var(--transition);
+}
+
+a:hover {
+    color: var(--secondary-brown-dark);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+h1, h2, h3, h4 {
+    color: var(--dark-elements-color);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+/* Utility Classes */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: var(--transition);
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-primary {
+    background: var(--highlight-color);
+    color: var(--white);
+    box-shadow: var(--button-shadow);
+}
+
+.btn-primary:hover {
+    background: var(--secondary-brown-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+}
+
+.btn-secondary:hover {
+    background: var(--white);
+    color: var(--primary-golden-dark);
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--highlight-color);
+    border: 2px solid var(--highlight-color);
+}
+
+.btn-outline:hover {
+    background: var(--highlight-color);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    color: var(--dark-elements-color);
+    margin-bottom: 1rem;
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+}
+
+.section-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    right: 50%;
+    transform: translateX(50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--highlight-color);
+    border-radius: 2px;
+}
+
+.section-header p {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 /* Header Styles */
@@ -142,10 +252,13 @@ body {
     width: 100%;
 }
 
+/* Hamburger Menu */
 .hamburger {
     display: none;
     flex-direction: column;
     cursor: pointer;
+    gap: 5px;
+    z-index: 1001; /* Ensure it's above other elements when mobile menu is open */
 }
 
 .hamburger span {
@@ -156,16 +269,84 @@ body {
     transition: 0.3s;
 }
 
-/* Hero Section */
+.hamburger.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Main Content Sections */
+main {
+    padding-top: 0; /* Header is fixed, no need for padding */
+}
+
+.tab-content {
+    display: none; /* Hidden by default */
+}
+
+.tab-content.active {
+    display: block; /* Shown when active */
+}
+
+/* Page Header - for secondary pages/tabs */
+.page-header {
+    background: var(--gradient-primary), url('hero-bg.jpg') no-repeat center center/cover;
+    color: var(--white);
+    padding: 120px 0 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gradient-hero); /* Overlay from root variable */
+    opacity: 1; /* Ensure overlay covers the background image */
+}
+
+.page-header .container {
+    position: relative;
+    z-index: 2;
+}
+
+.page-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    color: var(--white); /* Ensure heading is white on dark background */
+}
+
+.page-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.9); /* Ensure paragraph is light on dark background */
+}
+
+/* Hero Section (Home Page) */
 .hero {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* Updated background image with a placeholder */
-    background: var(--gradient-hero), url('hero-bg.jpg') no-repeat center center/cover; /* Placeholder for hero image */
-    background-size: cover; /* تأكيد تغطية الصورة للخلفية */
-    background-position: center; /* تأكيد توسيط الصورة */
+    background: var(--gradient-hero), url('hero-bg.jpg') no-repeat center center/cover;
+    background-size: cover;
+    background-position: center;
     color: var(--white);
     padding: 120px 0 60px;
     position: relative;
@@ -182,8 +363,8 @@ body {
     bottom: 0;
     background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
     opacity: 0.3;
+    z-index: 1; /* Ensure grain is above background image but below content */
 }
-
 
 .hero-content {
     display: grid;
@@ -202,6 +383,7 @@ body {
     font-weight: 700;
     margin-bottom: 1rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    color: var(--white); /* Ensure heading is white */
 }
 
 .hero-text h2 {
@@ -209,6 +391,7 @@ body {
     font-weight: 400;
     margin-bottom: 1.5rem;
     opacity: 0.9;
+    color: var(--accent-shine-gold); /* Ensure heading is colored */
 }
 
 .hero-text p {
@@ -216,6 +399,7 @@ body {
     margin-bottom: 2rem;
     opacity: 0.8;
     line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9); /* Ensure paragraph is light */
 }
 
 .hero-buttons {
@@ -225,72 +409,26 @@ body {
     justify-content: flex-end;
 }
 
-.btn {
-    padding: 12px 30px;
-    border: none;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: var(--transition);
-    cursor: pointer;
-    display: inline-block;
-    text-align: center;
-}
-
-.btn-primary {
-    background: var(--highlight-color);
-    color: var(--white);
-    box-shadow: var(--button-shadow);
-}
-
-.btn-primary:hover {
-    background: var(--secondary-brown-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.btn-secondary {
-    background: transparent;
-    color: var(--white);
-    border: 2px solid var(--white);
-}
-
-.btn-secondary:hover {
-    background: var(--white);
-    color: var(--primary-golden-dark);
-    transform: translateY(-2px);
-}
-
-.btn-outline {
-    background: transparent;
-    color: var(--highlight-color);
-    border: 2px solid var(--highlight-color);
-}
-
-.btn-outline:hover {
-    background: var(--highlight-color);
-    color: var(--white);
-    transform: translateY(-2px);
-}
-
 .hero-image {
     display: flex;
     justify-content: center;
     align-items: center;
     perspective: 1000px;
+    position: relative; /* Needed for z-index context */
+    z-index: 2; /* Ensure card is above grain */
 }
 
 .hero-card {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(var(--secondary-brown-dark-rgb), 0.85); /* Use RGB for transparency */
     backdrop-filter: blur(10px);
     padding: 3rem;
     border-radius: 20px;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(var(--primary-golden-light-rgb), 0.2); /* Use RGB for transparency */
     transition: transform 0.6s ease;
     transform-style: preserve-3d;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    color: var(--white); /* Ensure text within card is white */
 }
 
 .hero-card:hover {
@@ -302,24 +440,25 @@ body {
     margin-bottom: 1rem;
     color: var(--accent-shine-gold);
     text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-    /* Icon animation */
     transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 .hero-card:hover i {
     transform: scale(1.1) rotate(5deg);
-    color: var(--highlight-color); /* Change color on hover */
+    color: var(--highlight-color);
 }
 
 
 .hero-card h3 {
     font-size: 1.5rem;
     font-weight: 600;
+    color: var(--white); /* Ensure heading is white */
 }
 
 .hero-card p {
     font-size: 1.1rem;
     opacity: 0.9;
+    color: rgba(255, 255, 255, 0.9); /* Ensure paragraph is light */
 }
 
 .hero-stats {
@@ -329,10 +468,15 @@ body {
     margin-top: 4rem;
     position: relative;
     z-index: 2;
+    background: rgba(var(--secondary-brown-dark-rgb), 0.6); /* Use RGB for transparency */
+    padding: 30px 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
 }
 
 .stat {
     text-align: center;
+    color: var(--white); /* Ensure text within stats is white */
 }
 
 .stat h3 {
@@ -346,26 +490,7 @@ body {
 .stat p {
     font-size: 1.1rem;
     opacity: 0.9;
-}
-
-/* Section Styles */
-.section-header {
-    text-align: center;
-    margin-bottom: 4rem;
-}
-
-.section-header h2 {
-    font-size: 2.5rem;
-    color: var(--dark-elements-color);
-    margin-bottom: 1rem;
-    font-weight: 700;
-}
-
-.section-header p {
-    font-size: 1.2rem;
-    color: #7f8c8d;
-    max-width: 600px;
-    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 /* Services Section */
@@ -386,7 +511,7 @@ body {
     border-radius: 15px;
     box-shadow: var(--card-shadow);
     transition: var(--transition);
-    border: 1px solid var(--light-elements-color);
+    border: 1px solid var(--primary-golden-light);
     position: relative;
     overflow: hidden;
     text-align: right;
@@ -423,26 +548,23 @@ body {
     align-items: center;
     justify-content: center;
     margin-bottom: 1.5rem;
-    margin-right: auto;
-    margin-left: unset;
+    margin-right: auto; /* Center for RTL, not float */
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    /* Icon animation */
     transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .service-card:hover .service-icon {
-    background: var(--highlight-color); /* Change background on hover */
+    background: var(--highlight-color);
     transform: rotateY(10deg);
 }
 
 .service-icon i {
     font-size: 2rem;
     color: var(--white);
-    /* Icon animation */
     transition: transform 0.3s ease-in-out;
 }
 .service-card:hover .service-icon i {
-    transform: scale(1.1); /* Slightly enlarge icon on hover */
+    transform: scale(1.1);
 }
 
 .service-card h3 {
@@ -453,7 +575,7 @@ body {
 }
 
 .service-card p {
-    color: #7f8c8d;
+    color: var(--text-color);
     margin-bottom: 1.5rem;
     line-height: 1.6;
 }
@@ -465,13 +587,14 @@ body {
 
 .service-card ul li {
     padding: 0.5rem 0;
-    color: #34495e;
+    color: var(--text-color);
     position: relative;
     padding-right: 1.5rem;
 }
 
 .service-card ul li::before {
     content: '✓';
+    font-family: 'Cairo', sans-serif; /* Use Cairo for tick mark */
     position: absolute;
     right: 0;
     color: var(--highlight-color);
@@ -504,7 +627,7 @@ body {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
-.product-image {
+.product-image { /* Now just a container for icon, no specific image tag */
     width: 100px;
     height: 100px;
     background: var(--gradient-primary);
@@ -514,25 +637,22 @@ body {
     justify-content: center;
     margin: 0 auto 1.5rem;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    /* Icon animation */
     transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .product-card:hover .product-image {
-    background: var(--highlight-color); /* Change background on hover */
+    background: var(--highlight-color);
     transform: rotate(5deg);
 }
 
 .product-image i {
     font-size: 2.5rem;
     color: var(--white);
-    /* Icon animation */
     transition: transform 0.3s ease-in-out;
 }
 .product-card:hover .product-image i {
-    transform: scale(1.1); /* Slightly enlarge icon on hover */
+    transform: scale(1.1);
 }
-
 
 .product-card h3 {
     font-size: 1.3rem;
@@ -542,25 +662,9 @@ body {
 }
 
 .product-card p {
-    color: #7f8c8d;
+    color: var(--text-color);
     margin-bottom: 1.5rem;
     line-height: 1.6;
-}
-
-/* Gallery Section - Preview on Homepage */
-.gallery-preview-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin-top: 30px;
-}
-
-.gallery-preview-grid img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* CTA Section */
@@ -597,12 +701,14 @@ body {
     font-weight: 700;
     margin-bottom: 1rem;
     text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+    color: var(--white);
 }
 
 .cta-content p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
     opacity: 0.9;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .cta-buttons {
@@ -612,53 +718,13 @@ body {
     flex-wrap: wrap;
 }
 
-/* Page Header - for secondary pages/tabs */
-.page-header {
-    background: var(--gradient-primary);
-    color: var(--white);
-    padding: 120px 0 60px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.page-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-    opacity: 0.3;
-}
-
-.page-header .container {
-    position: relative;
-    z-index: 2;
-}
-
-.page-header h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.page-header p {
-    font-size: 1.2rem;
-    opacity: 0.9;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
 /* Detailed Services / Chalets Section */
 .detailed-services {
     padding: 80px 0;
     background: var(--light-gray-bg);
 }
 
-.service-section {
+.service-section { /* This is for the overall Chalet details section on "Our Chalet" page */
     background: var(--white);
     border-radius: 20px;
     margin-bottom: 3rem;
@@ -679,58 +745,59 @@ body {
     display: flex;
     align-items: center;
     gap: 2rem;
-    flex-direction: row-reverse;
+    flex-direction: row-reverse; /* For RTL icon/text alignment */
 }
 
-.service-icon {
+.service-header .service-icon {
     width: 100px;
     height: 100px;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(var(--white-rgb), 0.2); /* Use RGB value for white */
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    /* Icon animation */
     transition: background 0.3s ease, transform 0.3s ease;
 }
 
-.service-section:hover .service-icon {
-    background: var(--highlight-color); /* Change background on hover */
+.service-section:hover .service-header .service-icon { /* Specific hover for icon within header */
+    background: var(--highlight-color);
     transform: rotateY(15deg);
 }
 
-.service-icon i {
+.service-header .service-icon i {
     font-size: 3rem;
     color: var(--white);
-    /* Icon animation */
     transition: transform 0.3s ease-in-out;
 }
-.service-section:hover .service-icon i {
-    transform: scale(1.15); /* Slightly enlarge icon on hover */
+.service-section:hover .service-header .service-icon i {
+    transform: scale(1.15);
 }
-
 
 .service-title {
     text-align: right;
+    color: var(--white); /* Ensure title is white */
 }
 
 .service-title h2 {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
+    color: var(--white); /* Ensure heading is white */
 }
 
 .service-title p {
     font-size: 1.1rem;
     opacity: 0.9;
     line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9); /* Ensure paragraph is light */
 }
 
 .service-content {
     padding: 3rem;
     text-align: right;
+    color: var(--text-color);
 }
 
 .service-features h3,
@@ -762,7 +829,7 @@ body {
 }
 
 .feature-item:hover {
-    background: var(--light-elements-color);
+    background: var(--primary-golden-light);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
@@ -771,11 +838,10 @@ body {
     font-size: 1.5rem;
     color: var(--highlight-color);
     margin-top: 0.2rem;
-    /* Icon animation */
     transition: transform 0.3s ease-in-out;
 }
 .feature-item:hover i {
-    transform: scale(1.2); /* Slightly enlarge icon on hover */
+    transform: scale(1.2);
 }
 
 .feature-item h4 {
@@ -786,7 +852,7 @@ body {
 }
 
 .feature-item p {
-    color: #7f8c8d;
+    color: var(--text-color);
     line-height: 1.6;
 }
 
@@ -806,7 +872,7 @@ body {
 }
 
 .step:hover {
-    background: var(--light-elements-color);
+    background: var(--primary-golden-light);
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
@@ -824,7 +890,6 @@ body {
     font-weight: 700;
     margin: 0 auto 1.5rem;
     box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-    /* Icon animation (for step numbers which are not icons but follow similar visual logic) */
     transition: background 0.3s ease, transform 0.3s ease;
 }
 
@@ -841,7 +906,7 @@ body {
 }
 
 .step p {
-    color: #7f8c8d;
+    color: var(--text-color);
     line-height: 1.6;
 }
 
@@ -867,7 +932,7 @@ body {
 }
 
 .stat-item:hover {
-    background: var(--light-elements-color);
+    background: var(--primary-golden-light);
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
@@ -883,7 +948,6 @@ body {
     justify-content: center;
     margin: 0 auto 1.5rem;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    /* Icon animation */
     transition: background 0.3s ease, transform 0.3s ease;
 }
 .stat-item:hover .stat-icon {
@@ -895,7 +959,6 @@ body {
 .stat-icon i {
     font-size: 2rem;
     color: var(--white);
-    /* Icon animation */
     transition: transform 0.3s ease-in-out;
 }
 .stat-item:hover .stat-icon i {
@@ -910,44 +973,9 @@ body {
 }
 
 .stat-content p {
-    color: #7f8c8d;
+    color: var(--text-color);
     font-size: 1.1rem;
     font-weight: 500;
-}
-
-/* Gallery Filter (إذا استخدمت في صفحة المعرض المنفصلة) */
-.gallery-filter {
-    padding: 40px 0;
-    background: var(--white);
-    border-bottom: 1px solid var(--light-elements-color);
-}
-
-.filter-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-
-.filter-btn {
-    padding: 12px 24px;
-    border: 2px solid var(--highlight-color);
-    background: transparent;
-    color: var(--highlight-color);
-    border-radius: 25px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-    font-family: 'Cairo', sans-serif;
-    min-width: 120px;
-}
-
-.filter-btn:hover,
-.filter-btn.active {
-    background: var(--highlight-color);
-    color: var(--white);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(200, 121, 90, 0.2);
 }
 
 /* Gallery Showcase */
@@ -977,26 +1005,24 @@ body {
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
 }
 
-.gallery-image {
+.image-placeholder { /* Acts as the container for the image */
     width: 100%;
     height: 100%;
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden; /* Ensure image content stays within bounds */
 }
 
-.image-placeholder { /* This div now acts as the container for the image */
-    width: 100%;
-    height: 100%;
-    /* No background here, just the img */
-}
-
-.gallery-image img {
+.image-placeholder img {
     width: 100%;
     height: 100%;
     object-fit: cover; /* This is key for fitting and cropping images */
     display: block;
+    transition: transform 0.3s ease;
+}
+.gallery-item:hover .image-placeholder img {
+    transform: scale(1.05);
 }
 
 .gallery-overlay {
@@ -1005,12 +1031,15 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(var(--secondary-brown-dark-rgb), 0.8); /* Use RGB for transparency */
     display: flex;
+    flex-direction: column; /* Changed to column */
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* Center content vertically */
     opacity: 0;
     transition: opacity 0.4s ease;
+    text-align: center; /* Center content horizontally */
+    padding: 2rem;
 }
 
 .gallery-item:hover .gallery-overlay {
@@ -1018,9 +1047,7 @@ body {
 }
 
 .gallery-content {
-    text-align: center;
     color: var(--white);
-    padding: 2rem;
     transform: translateY(20px);
     transition: transform 0.4s ease, opacity 0.4s ease;
 }
@@ -1029,10 +1056,22 @@ body {
     opacity: 1;
 }
 
+.gallery-content h3 {
+    color: var(--white);
+    font-size: 1.8rem; /* Adjusted font size */
+    margin-bottom: 0.5rem;
+}
+
+.gallery-content p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem; /* Adjusted font size */
+    margin-bottom: 1.5rem; /* Increased margin */
+}
+
 .gallery-tags {
     display: flex;
     gap: 0.5rem;
-    justify-content: center;
+    justify-content: center; /* Centered tags in overlay */
     flex-wrap: wrap;
 }
 
@@ -1044,6 +1083,102 @@ body {
     font-size: 0.8rem;
     font-weight: 500;
     white-space: nowrap;
+}
+
+/* Therapeutic Services Section (New) */
+.therapy-services-overview {
+    padding: 60px 0;
+    background-color: var(--light-gray-bg);
+}
+
+.therapy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.therapy-card {
+    background-color: var(--white);
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.therapy-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.therapy-card .therapy-image {
+    width: 100%;
+    height: 200px; /* All images will have a fixed height of 200px */
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.therapy-card .therapy-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Key for fitting and cropping images proportionally */
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.therapy-card:hover .therapy-image img {
+    transform: scale(1.05);
+}
+
+.therapy-card h3 {
+    font-size: 24px;
+    color: var(--dark-elements-color);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.therapy-card p {
+    font-size: 16px;
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.therapy-card ul {
+    list-style: none;
+    padding: 0;
+    text-align: right;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.therapy-card ul li {
+    font-size: 15px;
+    color: var(--text-color);
+    margin-bottom: 8px;
+    position: relative;
+    padding-right: 25px;
+}
+
+.therapy-card ul li:last-child {
+    margin-bottom: 0;
+}
+
+.therapy-card ul li::before {
+    content: "\f00c"; /* Font Awesome check icon */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: var(--highlight-color);
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
 }
 
 /* Contact Page Styles */
@@ -1070,7 +1205,7 @@ body {
 }
 
 .contact-info-section p {
-    color: #7f8c8d;
+    color: var(--text-color);
     margin-bottom: 2rem;
     line-height: 1.6;
 }
@@ -1111,7 +1246,6 @@ body {
     justify-content: center;
     flex-shrink: 0;
     box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    /* Icon animation */
     transition: background 0.3s ease, transform 0.3s ease;
 }
 .contact-method:hover .method-icon {
@@ -1122,7 +1256,6 @@ body {
 .method-icon i {
     font-size: 1.5rem;
     color: var(--white);
-    /* Icon animation */
     transition: transform 0.3s ease-in-out;
 }
 .contact-method:hover .method-icon i {
@@ -1137,7 +1270,7 @@ body {
 }
 
 .method-content p {
-    color: #7f8c8d;
+    color: var(--text-color);
     margin-bottom: 0.3rem;
     font-weight: 500;
 }
@@ -1191,7 +1324,6 @@ body {
 
 .social-link i {
     font-size: 1.2rem;
-    /* Icon animation */
     transition: transform 0.3s ease-in-out;
 }
 .social-link:hover i {
@@ -1221,7 +1353,7 @@ body {
 }
 
 .footer-section p {
-    color: #bdc3c7;
+    color: var(--light-gray-bg); /* Adjusted for better contrast */
     line-height: 1.6;
     margin-bottom: 1rem;
 }
@@ -1236,7 +1368,7 @@ body {
 }
 
 .footer-section ul li a {
-    color: #bdc3c7;
+    color: var(--light-gray-bg); /* Adjusted for better contrast */
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -1255,7 +1387,7 @@ body {
 .social-links a {
     width: 40px;
     height: 40px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(var(--white-rgb), 0.1); /* Use RGB for transparency */
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1280,8 +1412,8 @@ body {
 .footer-bottom {
     text-align: center;
     padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: #bdc3c7;
+    border-top: 1px solid rgba(var(--white-rgb), 0.1); /* Use RGB for transparency */
+    color: var(--light-gray-bg); /* Adjusted for better contrast */
 }
 
 /* زر واتساب عائم (Floating WhatsApp Button) */
@@ -1311,6 +1443,32 @@ body {
 }
 
 /* Responsive Design */
+@media (max-width: 992px) {
+    .nav-container {
+        padding: 0 15px;
+    }
+
+    .nav-menu {
+        gap: 1.5rem; /* Adjusted gap for smaller screens */
+    }
+
+    .hero-text h1 {
+        font-size: 3rem; /* Adjusted font size */
+    }
+
+    .hero-text h2 {
+        font-size: 1.8rem; /* Adjusted font size */
+    }
+
+    .section-header h2 {
+        font-size: 2.2rem; /* Adjusted font size */
+    }
+
+    .footer-content {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
 @media (max-width: 768px) {
     .hamburger {
         display: flex;
@@ -1322,7 +1480,7 @@ body {
         position: fixed;
         right: -100%;
         left: unset;
-        top: 70px;
+        top: 80px; /* Below header height */
         flex-direction: column;
         background-color: var(--white);
         width: 100%;
@@ -1357,14 +1515,6 @@ body {
     .hero-stats {
         flex-direction: column;
         gap: 2rem;
-    }
-
-    .about-content { /* إذا كان هناك قسم "عنا" */
-        flex-direction: column-reverse;
-        text-align: center;
-    }
-    .about-content img {
-        margin-bottom: 20px;
     }
 
     .service-card {
@@ -1407,21 +1557,21 @@ body {
     .services-grid,
     .products-grid,
     .gallery-grid,
-    .therapy-grid { /* Added for new section */
+    .therapy-grid {
         grid-template-columns: 1fr;
     }
 
     .service-card ul,
-    .therapy-card ul { /* Adjusted for new section */
-        text-align: center; /* Center lists on smaller screens */
-        padding-right: 0; /* Remove padding if centering */
+    .therapy-card ul {
+        text-align: center;
+        padding-right: 0;
     }
 
     .service-card ul li::before,
-    .therapy-card ul li::before { /* Adjusted for new section */
-        right: auto; /* Remove explicit right positioning */
-        left: 5px; /* Add some padding to the left */
-        transform: translateY(-50%); /* Re-center vertically */
+    .therapy-card ul li::before {
+        right: auto;
+        left: 5px;
+        transform: translateY(-50%);
     }
 
     .section-header h2 {
@@ -1440,12 +1590,14 @@ body {
         font-size: 18px;
     }
 
-    .contact-grid {
-        grid-template-columns: 1fr;
+    .gallery-item {
+        height: 250px; /* Smaller fixed height for mobile */
     }
-
-    .social-links-contact h3, .social-grid {
-        justify-content: center; /* Center social links on mobile */
+    .gallery-content h3 {
+        font-size: 1.5rem; /* Adjusted for smaller screens */
+    }
+    .gallery-content p {
+        font-size: 0.9rem; /* Adjusted for smaller screens */
     }
 
     .footer-content {
@@ -1580,10 +1732,13 @@ body {
     }
 
     .gallery-item {
-        height: 250px;
+        height: 200px; /* Even smaller for very small screens */
     }
     .gallery-content h3 {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
+    }
+    .gallery-content p {
+        font-size: 0.8rem;
     }
 
     .stat-item .stat-content h3 {
@@ -1631,7 +1786,6 @@ body {
     }
 }
 
-
 /* Animations */
 @keyframes fadeInUp {
     from {
@@ -1644,6 +1798,7 @@ body {
     }
 }
 
+/* Apply animation to specific elements for staggered effect */
 .service-card,
 .product-card,
 .gallery-item,
@@ -1652,21 +1807,27 @@ body {
 .step,
 .contact-method,
 .social-link,
-.therapy-card { /* Added .therapy-card to animation */
+.therapy-card {
     animation: fadeInUp 0.6s ease forwards;
-    opacity: 0;
+    opacity: 0; /* Ensure elements are hidden before animation */
 }
+
+/* You might need to add animation-delay for staggered effect if desired */
+/* Example:
+.service-card:nth-child(1) { animation-delay: 0.1s; }
+.service-card:nth-child(2) { animation-delay: 0.2s; }
+*/
 
 /* Smooth scrolling for anchor links */
 html {
     scroll-behavior: smooth;
 }
 
-/* التبويبات (Tabs) - لـ index.html بصفحة واحدة متعددة التبويبات */
+/* Tab Content Management (for single-page layout) */
 .tab-content {
-    display: none; /* إخفاء جميع التبويبات افتراضياً */
+    display: none; /* Hide all tabs by default */
 }
 
 .tab-content.active {
-    display: block; /* إظهار التبويبة النشطة */
+    display: block; /* Show active tab */
 }
