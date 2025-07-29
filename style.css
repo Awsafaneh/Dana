@@ -25,6 +25,11 @@
     --hover-scale: scale(1.03);
     --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     --button-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+
+    /* RGB values for transparent colors */
+    --primary-golden-dark-rgb: 163, 138, 90;
+    --secondary-brown-dark-rgb: 94, 77, 48;
+    --highlight-color-rgb: 200, 121, 90;
 }
 
 /* Reset and Base Styles */
@@ -158,7 +163,7 @@ body {
     flex-direction: column;
     justify-content: center;
     /* Updated background image with a placeholder */
-    background: var(--gradient-hero), url('https://via.placeholder.com/1500x1000?text=Chalet+Dana+Hero+Image') no-repeat center center/cover; /* Placeholder for hero image */
+    background: var(--gradient-hero), url('hero-bg.jpg') no-repeat center center/cover; /* Placeholder for hero image */
     background-size: cover; /* تأكيد تغطية الصورة للخلفية */
     background-position: center; /* تأكيد توسيط الصورة */
     color: var(--white);
@@ -964,7 +969,7 @@ body {
     box-shadow: var(--card-shadow);
     transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
     position: relative;
-    height: 300px;
+    height: 300px; /* Fixed height for consistent image display */
 }
 
 .gallery-item:hover {
@@ -981,22 +986,16 @@ body {
     justify-content: center;
 }
 
-.image-placeholder {
+.image-placeholder { /* This div now acts as the container for the image */
     width: 100%;
     height: 100%;
-    background: var(--gradient-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--white);
-    font-size: 4rem;
-    opacity: 0.8;
+    /* No background here, just the img */
 }
 
 .gallery-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* This is key for fitting and cropping images */
     display: block;
 }
 
@@ -1407,8 +1406,46 @@ body {
 
     .services-grid,
     .products-grid,
-    .gallery-grid {
+    .gallery-grid,
+    .therapy-grid { /* Added for new section */
         grid-template-columns: 1fr;
+    }
+
+    .service-card ul,
+    .therapy-card ul { /* Adjusted for new section */
+        text-align: center; /* Center lists on smaller screens */
+        padding-right: 0; /* Remove padding if centering */
+    }
+
+    .service-card ul li::before,
+    .therapy-card ul li::before { /* Adjusted for new section */
+        right: auto; /* Remove explicit right positioning */
+        left: 5px; /* Add some padding to the left */
+        transform: translateY(-50%); /* Re-center vertically */
+    }
+
+    .section-header h2 {
+        font-size: 28px;
+    }
+
+    .section-header p {
+        font-size: 16px;
+    }
+
+    .cta-content h2 {
+        font-size: 32px;
+    }
+
+    .cta-content p {
+        font-size: 18px;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .social-links-contact h3, .social-grid {
+        justify-content: center; /* Center social links on mobile */
     }
 
     .footer-content {
@@ -1614,7 +1651,8 @@ body {
 .feature-item,
 .step,
 .contact-method,
-.social-link {
+.social-link,
+.therapy-card { /* Added .therapy-card to animation */
     animation: fadeInUp 0.6s ease forwards;
     opacity: 0;
 }
