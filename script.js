@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetContent = document.getElementById(targetId);
         if (targetContent) {
             targetContent.classList.add('active');
-            targetContent.style.display = 'block'; // Or 'flex' or 'grid' based on section's display
+            targetContent.style.display = 'block'; // Most sections are block. Adjust if any section needs 'flex' or 'grid' as its root display.
             window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top of the page
         }
     };
@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Optional: Close mobile menu when clicking outside
     document.addEventListener('click', (e) => {
+        // Check if the click is outside the nav menu and hamburger icon AND the nav menu is active
         if (!navMenu.contains(e.target) && !hamburger.contains(e.target) && navMenu.classList.contains('active')) {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
